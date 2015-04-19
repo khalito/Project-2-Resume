@@ -52,7 +52,6 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
 </head>
 <body unresolved>
   <div id="main">
-    Hello world!   <!-- You'll be deleting this line in the course -->
 
     <!--
     Everything from here to the <script> tag below is the skeleton of your
@@ -63,19 +62,25 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     <div id="header" class="center-content clearfix">
       <ul id="topContacts" class='flex-box'></ul>
     </div>
+
     <div style='clear: both;'></div>
+
     <div id="workExperience" class='gray'>
       <h2>Work Experience</h2>
     </div>
+
     <div id="projects">
       <h2>Projects</h2>
     </div>
+
     <div id="education" class='gray'>
       <h2>Education</h2>
     </div>
+
     <div id="mapDiv">
       <h2>Where I've Lived and Worked</h2>
     </div>
+
     <div id="letsConnect" class='dark-gray'>
       <h2 class='orange center-text'>Let's Connect</h2>
         <ul id="footerContacts" class="flex-box">
@@ -113,6 +118,95 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
         an opening and closing set of slash asterisks for block comments.
     */
 
+    // Adding contact info one by one
+    if(bio.contactInfo) {
+
+      var formattedInfo = HTMLmobile.replace("%data%", bio.contactInfo[0]["mobile"]);
+      $("#topContacts").append(formattedInfo);
+
+      formattedInfo = HTMLemail.replace("%data%", bio.contactInfo[0]["E-mail"]);
+      $("#topContacts").append(formattedInfo);
+
+      formattedInfo = HTMLgithub.replace("%data%", bio.contactInfo[0]["github"]);
+      $("#topContacts").append(formattedInfo);
+
+      formattedInfo = HTMLlocation.replace("%data%", bio.contactInfo[0]["location"]);
+      $("#topContacts").append(formattedInfo);
+
+    }
+
+    //Add bio picture
+    var bioPic = HTMLbioPic.replace("%data%", "images/fry.jpg");
+    $("#header").append(bioPic);
+
+
+    // While loop to add all skills if there are any
+    if(bio.skills.length > 0) {
+
+      $("#header").append(HTMLskillsStart);
+
+      var formattedSkill;
+
+      var skillCount = 0;
+
+      while(skillCount < bio.skills.length) {
+
+        formattedSkill = HTMLskills.replace("%data%", bio.skills[skillCount]);
+
+        $("#skills").append(formattedSkill);
+
+        skillCount++;
+
+      }
+
+    }
+
+
+    //
+    //Doing it one by one
+    //
+    //   var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
+    //   $("#skills").append(formattedSkill);
+
+    //   formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
+    //   $("#skills").append(formattedSkill);
+
+    //   formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
+    //   $("#skills").append(formattedSkill);
+
+    //   formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
+    //   $("#skills").append(formattedSkill);
+    // }
+
+    // Doing it with the for loop
+    function displayWork() {
+
+      // check whether work exists
+      if(work.jobs) {
+        // loop through all jobs mention in work
+        for(job in work.jobs) {
+          //this adds a new div with the class "work-entry". This will be useful later as a reference when we append the job info after the last work-entry item
+          $("#workExperience").append(HTMLworkStart);
+          //format all the employment data using the helper.js template
+          var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+          var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+          var formattedEmployerTitle = formattedEmployer + formattedTitle;
+          var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+          var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+          var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+          //append all the employment information for the current job (first concatenate employer and title)
+          $(".work-entry:last").append(formattedEmployerTitle);
+          $(".work-entry:last").append(formattedLocation);
+          $(".work-entry:last").append(formattedDates);
+          $(".work-entry:last").append(formattedDescription);
+
+        } //close for loop
+
+      } // close if
+
+    } //close function
+
+    displayWork();
 
     if(document.getElementsByClassName('flex-item').length === 0) {
       document.getElementById('topContacts').style.display = 'none';
@@ -135,6 +229,32 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     if(document.getElementById('map') === null) {
       document.getElementById('mapDiv').style.display = 'none';
     }
+
+    // log the location of the mouse pointer on each click. that is how the analytics tools work!!
+    $(document).click(function(loc) {
+      console.log(loc)
+    });
+
+
+
+    // function locationizer(work_obj) {
+
+    // var myLocations = [];
+
+    // for (var job in work_obj.jobs) {
+
+    //     myLocations.push(work_obj.jobs[job].location);
+
+    // }
+
+    // return myLocations;
+
+    // }
+
+    // locationizer();
+
+
+
   </script>
 </body>
 </html>

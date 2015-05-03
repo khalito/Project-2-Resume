@@ -8,9 +8,10 @@
   overflow: auto;
 }
 
-.education-entry, .work-entry, .project-entry {
+.education-entry, .work-entry, .project-entry, .online-entry {
   padding-left: 5%;
   padding-right: 5%;
+  padding-top: 1%;
 }
 
 h1 {
@@ -48,6 +49,19 @@ h2, h3, h4, h5 {
   padding-right: 5%;
 }
 
+.school-major, .responsibility {
+  padding-top: 1%;
+  padding-bottom: 0.5%;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.subject, .task{
+  position: relative;
+  left: 1em;
+  font-size: 0.9em;
+  line-height: 21px;
+}
 
 .date-text {
   font-style: italic;
@@ -89,6 +103,11 @@ a {
 #skillsH3 {
   color: #F5AE23;
   display: none;
+}
+
+.sub-title {
+  padding-top: 3%;
+  padding-bottom: 0px;
 }
 
 .orange {
@@ -135,7 +154,7 @@ a {
   padding-bottom: 2.5%
 }
 
-ul {
+.special-ul {
   list-style-type: none;
 }
 

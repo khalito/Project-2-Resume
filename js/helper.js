@@ -1,17 +1,3 @@
-/*
-
-This file contains all of the code running in the background that makes resumeBuilder.js possible. We call these helper functions because they support your code in this course.
-
-Don't worry, you'll learn what's going on in this file throughout the course. You won't need to make any changes to it until you start experimenting with inserting a Google Map in Problem Set 3.
-
-Cameron Pittman
-*/
-
-
-/*
-These are HTML strings. As part of the course, you'll be using JavaScript functions
-replace the %data% placeholder text you see in them.
-*/
 var HTMLheaderName = '<h1 id="name">%data%</h1>';
 var HTMLheaderRole = '<span>%data%</span><hr/>';
 
@@ -26,15 +12,18 @@ var HTMLlocation = '<li class="flex-item"><span class="orange-text">location:</s
 var HTMLbioPic = '<img src="%data%" class="biopic">';
 var HTMLwelcomeMsg = '<span class="welcome-message">%data%</span>';
 
-var HTMLskillsStart = '<h3 id="skillsH3">Skills at a Glance:</h3><ul id="skills" class="flex-box"></ul>';
-var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
+// var HTMLskillsStart = '<h3 id="skillsH3">Skills at a Glance:</h3><ul id="skills" class="flex-box"></ul>';
+var HTMLsummaryStart = '<h3 id="skillsH3">Summary</h3><p id="summary" class="white-text"></p>';
+// var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
 
 var HTMLworkStart = '<div class="work-entry"></div>';
 var HTMLworkEmployer = '<a href="#">%data%';
 var HTMLworkTitle = ' - %data%</a>';
 var HTMLworkDates = '<div class="date-text">%data%</div>';
 var HTMLworkLocation = '<div class="location-text">%data%</div>';
-var HTMLworkDescription = '<p><br>%data%</p>';
+var HTMLworkDescription = '<p class="responsibility"><br>%data%</h4>';
+var HTMLworkTaskStart = '<ul class="task-entry">Responsibilities included:</ul>';
+var HTMLworkTask = '<li class="task">%data%</li>';
 
 var HTMLprojectStart = '<div class="project-entry"></div>';
 var HTMLprojectTitle = '<a href="#">%data%</a>';
@@ -43,30 +32,55 @@ var HTMLprojectDescription = '<p><br>%data%</p>';
 var HTMLprojectImage = '<img src="%data%">';
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
-var HTMLschoolName = '<a href="#">%data%';
+var HTMLschoolName = '<a href="%url%">%data%';
 var HTMLschoolDegree = ' -- %data%</a>';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
-var HTMLschoolMajor = '<em><br>Major: %data%</em>';
+var HTMLschoolMajor = '<p class="school-major"><br>Major(s): %data%</p>';
+var HTMLsubjectsStart = '<ul class="subject-entry">Subjects:</ul>';
+var HTMLsubjects = '<li class="subject">%data%</li>';
 
-var HTMLonlineClasses = '<h3>Online Classes</h3>';
-var HTMLonlineTitle = '<a href="#">%data%';
+var HTMLonlineClasses = '<h3 class="sub-title">Online Classes</h3>';
+var HTMLonlineStart = '<div class="online-entry"></div>';
+var HTMLonlineTitle = '<a href="%url%">%data%';
 var HTMLonlineSchool = ' - %data%</a>';
 var HTMLonlineDates = '<div class="date-text">%data%</div>';
 var HTMLonlineURL = '<br><a href="#">%data%</a>';
+var HTMLonlineDesc = '<p><br>%data%</p>';
 
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
 
 
-/*
-The International Name challenge in Lesson 2 where you'll create a function that will need this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
-*/
+
+// MAKE LAST NAME UPPERCASE
+function nameChanger(oldName) {
+  //split in First and Last Name
+  list = oldName.split(' ');
+  // make all names first letter uppercase
+  for (var name in list) {
+    name = name.slice(0,1).toUpperCase() + name.slice(1).toLowerCase();
+  }
+  // getLastName
+  var lastName = list[list.length - 1];
+  // make uppercase
+  lastName = lastName.toUpperCase();
+  // put it back into the list
+  list[list.length - 1] = lastName;
+  // join all names back together
+  var newName = list.join(" ");
+
+  $("#header > h1").text(newName);
+}
+
 $(document).ready(function() {
+
   $('button').click(function() {
-    var iName = inName() || function(){};
-    $('#name').html(iName);
+
+    nameChanger(bio.name);
+
   });
+
 });
 
 /*
@@ -105,9 +119,7 @@ function initializeMap() {
 
   var locations;
 
-  var mapOptions = {
-    disableDefaultUI: true
-  };
+  var mapOptions = {};
 
   // This next line makes `map` a new Google Map JavaScript Object and attaches it to
   // <div id="map">, which is appended as part of an exercise late in the course.
@@ -123,8 +135,11 @@ function initializeMap() {
     // initializes an empty array
     var locations = [];
 
-    // adds the single location property from bio to the locations array
-    locations.push(bio.contacts.location);
+    // adds the current location from bio to the locations array
+    locations.push(bio.contactInfo.location);
+
+    // and the home town as well
+    locations.push(bio.hometown);
 
     // iterates through school locations and appends each location to
     // the locations array
@@ -228,16 +243,13 @@ function initializeMap() {
 
 }
 
-/*
-Uncomment the code below when you're ready to implement a Google Map!
-*/
 
-// Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+// // // Calls the initializeMap() function when the page loads
+window.addEventListener('load', initializeMap);
 
-// Vanilla JS way to listen for resizing of the window
-// and adjust map bounds
-//window.addEventListener('resize', function(e) {
-  // Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+// // // Vanilla JS way to listen for resizing of the window
+// // and adjust map bounds
+window.addEventListener('resize', function(e) {
+// //   // Make sure the map bounds get updated on page resize
+map.fitBounds(mapBounds);
+});

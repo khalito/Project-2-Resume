@@ -1,66 +1,23 @@
 <!DOCTYPE html>
-
-<!--
-This is an HTML document. It contains information about how elements in the website
-are arranged. In other words, it describes the layout of a website.
-
-I can't wait to see the resumes you put together!
-
-Cameron Pittman, Udacity Course Developer
--->
-
-<!--
-The <head> of a website generally links to important resources the page will
-need to load. You'll see a lot of <link>s to CSS files for styles and
-<scripts> for JavaScript files to build interactions.
--->
 <head>
-  <!-- This tells the browser how to read the document. -->
+
   <meta charset="utf-8">
-
-  <!-- Tells the browser what the title of this page should be. -->
   <title>Resume</title>
+  <meta name="viewport" content="width=device-width">
 
-  <!-- Load the page styles. -->
   <link href="css/style.css" rel="stylesheet" type="text/css">
 
-  <!--
-  jQuery is a common JavaScript library for reading and making changes to the
-  Document Object Model (DOM). The DOM is a tree that contains information
-  about what is actually visible on a website.
-
-  While HTML is a static document, the browser converts HTML to the
-  DOM and the DOM can change. In fact, JavaScript's power comes from
-  its ability to manipulate the DOM, which is essentially a JavaScript
-  object. When JavaScript makes something interesting happen on a
-  website, it's likely the action happened because JavaScript changed
-  the DOM. jQuery is fast and easy to use, but it doesn't do anything
-  you can't accomplish with vanilla (regular) JavaScript.
-  -->
   <script src="js/jQuery.js"></script>
-
-  <!-- More on helper.js in the class -->
   <script src="js/helper.js"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
-  <!--
-  Uncomment the <script> tag below when you're ready to add an interactive
-  Google Map to your resume!
-  -->
-  <!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script> -->
-
-  <meta name="viewport" content="width=device-width">
 </head>
+
 <body unresolved>
   <div id="main">
 
-    <!--
-    Everything from here to the <script> tag below is the skeleton of your
-    website. Your code will add information to each of the sections of the
-    resume below. You can pretty easily figure out what each section will
-    display by looking at the id or at what's written between the <h2> tags.
-    -->
     <div id="header" class="center-content clearfix">
-      <ul id="topContacts" class='flex-box'></ul>
+      <ul id="topContacts" class='flex-box special-ul'></ul>
     </div>
 
     <div style='clear: both;'></div>
@@ -83,177 +40,212 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
 
     <div id="letsConnect" class='dark-gray'>
       <h2 class='orange center-text'>Let's Connect</h2>
-        <ul id="footerContacts" class="flex-box">
+        <ul id="footerContacts" class="flex-box special-ul">
       </ul>
     </div>
   </div>
 
-  <!--
-  The next line tells the browser where to download the JavaScript file you'll be
-  writing. In resumeBuilder.js, you'll be writing code that builds the resume
-  dynamically when this website, index.html, is opened.
-  -->
+
   <script src="js/resumeBuilder.js"></script>
-
-
-  <!--
-  These scripts are written in JavaScript. You'll be breaking them down as part of
-  a quiz. Essentially, the next few lines are checking to see if you have not
-  changed each section of the resume. If you have not made any changes to a section
-  of the resume, then that part of the resume does not show up. More on this in the
-  course.
-  -->
-
   <script type="text/javascript">
-    // Notice how all of a sudden there's JavaScript inside this HTML
-    // document? You can write JavaScript between <script> tags. At the end of your
-    // JavaScript, don't forget the closing script tag with the slash (/).
 
+    // ADDING BIO INFO ONE BY ONE
+      var formattedName = HTMLheaderName.replace('%data%', bio.name);
 
-    // Also, this is a JavaScript style comment. You can comment in JavaScript with:
+      var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
 
-    //   two slashes for all following characters on a single line, or
+      $('#header').prepend(formattedName, formattedRole);
 
-    /*
-        an opening and closing set of slash asterisks for block comments.
-    */
-
-    // Adding contact info one by one
-    if(bio.contactInfo) {
-
-      var formattedInfo = HTMLmobile.replace("%data%", bio.contactInfo[0]["mobile"]);
+      var formattedInfo = HTMLmobile.replace("%data%", bio.contactInfo["mobile"]);
       $("#topContacts").append(formattedInfo);
+      $("#footerContacts").append(formattedInfo);
 
-      formattedInfo = HTMLemail.replace("%data%", bio.contactInfo[0]["E-mail"]);
+      formattedInfo = HTMLemail.replace("%data%", bio.contactInfo["E-mail"]);
       $("#topContacts").append(formattedInfo);
+      $("#footerContacts").append(formattedInfo);
 
-      formattedInfo = HTMLgithub.replace("%data%", bio.contactInfo[0]["github"]);
+      formattedInfo = HTMLgithub.replace("%data%", bio.contactInfo["github"]);
       $("#topContacts").append(formattedInfo);
+      $("#footerContacts").append(formattedInfo);
 
-      formattedInfo = HTMLlocation.replace("%data%", bio.contactInfo[0]["location"]);
+      formattedInfo = HTMLlocation.replace("%data%", bio.contactInfo["location"]);
       $("#topContacts").append(formattedInfo);
+      $("#footerContacts").append(formattedInfo);
 
-    }
-
-    //Add bio picture
-    var bioPic = HTMLbioPic.replace("%data%", "images/fry.jpg");
-    $("#header").append(bioPic);
-
-
-    // While loop to add all skills if there are any
-    if(bio.skills.length > 0) {
-
-      $("#header").append(HTMLskillsStart);
-
-      var formattedSkill;
-
-      var skillCount = 0;
-
-      while(skillCount < bio.skills.length) {
-
-        formattedSkill = HTMLskills.replace("%data%", bio.skills[skillCount]);
-
-        $("#skills").append(formattedSkill);
-
-        skillCount++;
-
-      }
-
-    }
+      //ADD PICTURE AND SUMMARY
+      var bioPic = HTMLbioPic.replace("%data%", "images/fry.jpg");
+      $("#header").append(bioPic);
+      $("#header").append(HTMLsummaryStart);
+      $("#summary").append(bio.summary);
 
 
-    //
-    //Doing it one by one
-    //
-    //   var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
-    //   $("#skills").append(formattedSkill);
 
-    //   formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
-    //   $("#skills").append(formattedSkill);
+    // DISPLAY ALL WORK ITEMS WITH A FOR LOOP
+    function displayWork()
+      {
 
-    //   formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
-    //   $("#skills").append(formattedSkill);
+        // check whether work exists
+        if(work.jobs)
+          {
+            // loop through all jobs mention in work
+            for(job in work.jobs)
+              {
+                //this adds a new div with the class "work-entry". This will be useful later as a reference when we append the job info after the last work-entry item
+                $("#workExperience").append(HTMLworkStart);
 
-    //   formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
-    //   $("#skills").append(formattedSkill);
-    // }
+                var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+                var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+                var formattedEmployerTitle = formattedEmployer + formattedTitle;
+                $(".work-entry:last").append(formattedEmployerTitle);
 
-    // Doing it with the for loop
-    function displayWork() {
+                var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+                $(".work-entry:last").append(formattedLocation);
 
-      // check whether work exists
-      if(work.jobs) {
-        // loop through all jobs mention in work
-        for(job in work.jobs) {
-          //this adds a new div with the class "work-entry". This will be useful later as a reference when we append the job info after the last work-entry item
-          $("#workExperience").append(HTMLworkStart);
-          //format all the employment data using the helper.js template
-          var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-          var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-          var formattedEmployerTitle = formattedEmployer + formattedTitle;
-          var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-          var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-          var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-          //append all the employment information for the current job (first concatenate employer and title)
-          $(".work-entry:last").append(formattedEmployerTitle);
-          $(".work-entry:last").append(formattedLocation);
-          $(".work-entry:last").append(formattedDates);
-          $(".work-entry:last").append(formattedDescription);
+                var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+                $(".work-entry:last").append(formattedDates);
 
-        } //close for loop
+                for (role in work.jobs[job].description)
+                  {
+                    var formattedResponsibility = HTMLworkDescription.replace("%data%", work.jobs[job].description[role].responsibility);
+                    $(".work-entry:last").append(formattedResponsibility);
 
-      } // close if
+                    $(".work-entry:last").append(HTMLworkTaskStart);
+                    for (task in work.jobs[job].description[role].tasks)
+                      {
+                        var formattedTask = HTMLworkTask.replace("%data%", work.jobs[job].description[role].tasks[task]);
+                        $(".task-entry:last").append(formattedTask);
+                      }
+                  }
 
-    } //close function
+              } //close for loop
+
+          } // close if statement
+
+      } //close function
 
     displayWork();
 
-    if(document.getElementsByClassName('flex-item').length === 0) {
-      document.getElementById('topContacts').style.display = 'none';
-    }
-    if(document.getElementsByTagName('h1').length === 0) {
-      document.getElementById('header').style.display = 'none';
-    }
-    if(document.getElementsByClassName('work-entry').length === 0) {
-      document.getElementById('workExperience').style.display = 'none';
-    }
-    if(document.getElementsByClassName('project-entry').length === 0) {
-      document.getElementById('projects').style.display = 'none';
-    }
-    if(document.getElementsByClassName('education-entry').length === 0) {
-      document.getElementById('education').style.display = 'none';
-    }
-    if(document.getElementsByClassName('flex-item').length === 0) {
-      document.getElementById('letsConnect').style.display = 'none';
-    }
-    if(document.getElementById('map') === null) {
-      document.getElementById('mapDiv').style.display = 'none';
-    }
 
-    // log the location of the mouse pointer on each click. that is how the analytics tools work!!
-    $(document).click(function(loc) {
-      console.log(loc)
-    });
+    // DISPLAY ALL THE PROJECTS WITH AN ENCAPSULATED FUNCTION
+    projects.display = function()
+      {
+
+        for (var project in projects.projects)
+          {
+
+            $("#projects").append(HTMLprojectStart);
+
+            var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+            $(".project-entry:last").append(formattedTitle);
+
+            var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+            $(".project-entry:last").append(formattedDates);
+
+            var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+            $(".project-entry:last").append(formattedDescription);
+
+            // PROJECT IMAGES - IN CASE YOU WANT TO SHOW THEM
+            // for (var image in projects.projects[project].images) {
+            //   var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+            //   $(".project-entry:last").append(formattedImage);
+            //   }
+          }
+      }
+
+    projects.display();
+
+    // DISPLAY ALL EDUCATION ITEMS
+    function displayEducation()
+      {
+
+        for (var school in education.schools)
+          {
+
+            $("#education").append(HTMLschoolStart);
+
+            var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[school].name);
+            var formattedSchoolName = formattedSchoolName.replace("%url%", education.schools[school].url);
+            var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
+            formattedSchoolName = formattedSchoolName + formattedDegree;
+            $(".education-entry:last").append(formattedSchoolName);
+
+            var formattedschoolLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
+            $(".education-entry:last").append(formattedschoolLocation);
+
+            var formattedYear = HTMLschoolDates.replace("%data%", education.schools[school].graduationYear);
+            $(".education-entry:last").append(formattedYear);
+
+            var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].major);
+            $(".education-entry:last").append(formattedMajor);
+
+            $(".education-entry:last").append(HTMLsubjectsStart);
+
+            for (subject in education.schools[school].subjects)
+              {
+                var formattedSubjects = HTMLsubjects.replace("%data%", education.schools[school].subjects[subject]);
+                $(".subject-entry:last").append(formattedSubjects);
+              }
+
+          }
+
+        $("#education").append(HTMLonlineClasses);
+
+        for (var course in education.onlineClasses) {
+
+          $("#education").append(HTMLonlineStart);
+
+          var formattedCourseName = HTMLonlineTitle.replace("%data%", education.onlineClasses[course].courseName);
+          formattedCourseName = formattedCourseName.replace("%url%", education.onlineClasses[course].url);
+          var formattedCourseProvider = HTMLonlineSchool.replace("%data%", education.onlineClasses[course].provider);
+          formattedCourseName = formattedCourseName + formattedCourseProvider;
+          $(".online-entry:last").append(formattedCourseName);
+
+          var formattedCourseDate = HTMLonlineDates.replace("%data%", education.onlineClasses[course].date);
+          $(".online-entry:last").append(formattedCourseDate);
+
+          var formattedCourseDesc = HTMLonlineDesc.replace("%data%", education.onlineClasses[course].description);
+          $(".online-entry:last").append(formattedCourseDesc);
+
+        }
+      }
+
+    displayEducation();
+
+    $("#mapDiv").append(googleMap);
 
 
 
-    // function locationizer(work_obj) {
+    // FUNCTIONS TO HIDE EMPTY SECTIONS OF THE CV
+      if (document.getElementsByClassName('flex-item').length === 0)
+        {
+          document.getElementById('topContacts').style.display = 'none';
+        }
+      if (document.getElementsByTagName('h1').length === 0)
+        {
+          document.getElementById('header').style.display = 'none';
+        }
+      if (document.getElementsByClassName('work-entry').length === 0)
+        {
+          document.getElementById('workExperience').style.display = 'none';
+        }
+      if (document.getElementsByClassName('project-entry').length === 0)
+        {
+          document.getElementById('projects').style.display = 'none';
+        }
+      if (document.getElementsByClassName('education-entry').length === 0)
+        {
+          document.getElementById('education').style.display = 'none';
+        }
+      if (document.getElementsByClassName('flex-item').length === 0)
+        {
+          document.getElementById('letsConnect').style.display = 'none';
+        }
+      if (document.getElementById('map') === null)
+        {
+          document.getElementById('mapDiv').style.display = 'none';
+        }
 
-    // var myLocations = [];
-
-    // for (var job in work_obj.jobs) {
-
-    //     myLocations.push(work_obj.jobs[job].location);
-
-    // }
-
-    // return myLocations;
-
-    // }
-
-    // locationizer();
-
-
+    // $("#main").append(internationalizeButton);
 
   </script>
 </body>

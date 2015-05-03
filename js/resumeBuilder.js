@@ -1,8 +1,8 @@
 var bio =
-	{	// adding properties when declaring the object
+	{
 		"name" : "Said Khalid Scharaf",
 		"role" : "front-end ninja",
-		"welcome" : "Hello world!",
+		"welcomeMessage" : "Hello world!",
 		"contactInfo" :
 			{
 				"mobile": "+41 787 325 381",
@@ -75,28 +75,32 @@ var work = {
 	};
 
 
-var projects = {
-	"projects" : [
-		{
-			"title" : "Kuwait Food and Beverage Exports",
-			"dates" : "Mar 2012 - Dec 2012",
-			"description" : "The project aims at increasing Kuwait's non-oil exports by helping food and beverage exporters to increase and diversify their exports. I contributed to the design of the project and was responsible for managing and coordinating the project's execution. The project has a duration of two years and a total project value of USD 1 million.",
-			"images" : [
-				"http://placekitten.com/g/300/200",
-				"http://placekitten.com/g/300/200"
+var projects =
+	{
+		"projects" :
+			[
+				{
+					"title" : "Kuwait Food and Beverage Exports",
+					"dates" : "Mar 2012 - Dec 2012",
+					"description" : "The project aims at increasing Kuwait's non-oil exports by helping food and beverage exporters to increase and diversify their exports. I contributed to the design of the project and was responsible for managing and coordinating the project's execution. The project has a duration of two years and a total project value of USD 1 million.",
+					"images" :
+						[
+							"http://placekitten.com/g/300/200",
+							"http://placekitten.com/g/300/200"
+						]
+				},
+				{
+					"title" : "Redevelopment of ITC's project management and information system",
+					"dates" : "Mar 2014",
+					"description" : "The project's objective was to re-design ITC's project management software and related business processes",
+					"images" :
+						[
+							"http://placekitten.com/g/300/200",
+							"http://placekitten.com/g/300/200"
+						]
+				}
 			]
-		},
-		{
-			"title" : "Redevelopment of ITC's project management and information system",
-			"dates" : "Mar 2014",
-			"description" : "The project's objective was to re-design ITC's project management software and related business processes",
-			"images" : [
-				"http://placekitten.com/g/300/200",
-				"http://placekitten.com/g/300/200"
-			]
-		}
-	]
-};
+	};
 
 var education =
 	{
@@ -106,12 +110,12 @@ var education =
 					"name" : "Freie Universität Berlin",
 					"location" : "Berlin, Germany",
 					"degree" : "Magister Artium",
-					"major" :
+					"majors" :
 						[
 							"Economics",
-							" Middle East Studies"
+							" Middle East studies"
 						],
-					"graduationYear" : "Apr 2005 - Sep 2010",
+					"graduationYear" : 2010,
 					"url" : "http://www.fu-berlin.de",
 					"subjects" :
 						[
@@ -128,8 +132,11 @@ var education =
 					"name" : "Université Paris 1 Sorbonne-Panthéon",
 					"location" : "Paris, France",
 					"degree" : "Exchange semester",
-					"major" : "International trade",
-					"graduationYear" : "Sep 2006 - Apr 2007",
+					"majors" :
+						[
+							"International trade"
+						],
+					"graduationYear" : 2007,
 					"url" : "http://www.univ-paris1.fr",
 					"subjects" :
 						[
@@ -139,20 +146,20 @@ var education =
 						]
 				}
 			],
-		"onlineClasses" :
+		"onlineCourses" :
 			[
 				{
-					"courseName" : "Intro to Computer Science",
-					"provider" : "Udacity",
+					"title" : "Intro to Computer Science",
+					"school" : "Udacity",
 					"url" : "https://www.udacity.com/course/intro-to-computer-science--cs101",
-					"date" : "February 2014",
+					"date" : 2014,
 					"description" : "This course taught me the foundational concepts in computer science using Python 2.7. The course's objective was to rebuild google original search engine, touching on key search engine components including a crawler, an index and a page rank algorithm. This was my first encounter with MOOCs and computer science and Professor Dave Evans (University of Virgina) taught me the basic techniques that I am still using today, most importantly how to think like a computer scientist."
 				},
 				{
-					"courseName" : "Front-End Web Developer Nanodegree",
-					"provider" : "Udacity",
+					"title" : "Front-End Web Developer Nanodegree",
+					"school" : "Udacity",
 					"url" : "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001",
-					"date" : "XXXX 2015",
+					"date" : 2015,
 					"description" : "In the Nanodegree program, you will build six portfolio-worthy projects. Depending on your knowledge and skill level, you can either learn the necessary skills through our supporting courses, or jump into the projects directly. A summary of each of these projects, as well as links to their supporting courses are included in the sections below. Subjects included: Responsive web design, JavaScrip and jQuery, Object-Oriented JavaScript, website performance optimization, AJAX."
 				}
 			]

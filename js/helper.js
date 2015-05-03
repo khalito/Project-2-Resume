@@ -40,7 +40,7 @@ var HTMLschoolMajor = '<p class="school-major"><br>Major(s): %data%</p>';
 var HTMLsubjectsStart = '<ul class="subject-entry">Subjects:</ul>';
 var HTMLsubjects = '<li class="subject">%data%</li>';
 
-var HTMLonlineClasses = '<h3 class="sub-title">Online Classes</h3>';
+var HTMLonlineCourses = '<h3 class="sub-title">Online Classes</h3>';
 var HTMLonlineStart = '<div class="online-entry"></div>';
 var HTMLonlineTitle = '<a href="%url%">%data%';
 var HTMLonlineSchool = ' - %data%</a>';

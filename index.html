@@ -175,7 +175,7 @@
             var formattedYear = HTMLschoolDates.replace("%data%", education.schools[school].graduationYear);
             $(".education-entry:last").append(formattedYear);
 
-            var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].major);
+            var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
             $(".education-entry:last").append(formattedMajor);
 
             $(".education-entry:last").append(HTMLsubjectsStart);
@@ -188,22 +188,22 @@
 
           }
 
-        $("#education").append(HTMLonlineClasses);
+        $("#education").append(HTMLonlineCourses);
 
-        for (var course in education.onlineClasses) {
+        for (var course in education.onlineCourses) {
 
           $("#education").append(HTMLonlineStart);
 
-          var formattedCourseName = HTMLonlineTitle.replace("%data%", education.onlineClasses[course].courseName);
-          formattedCourseName = formattedCourseName.replace("%url%", education.onlineClasses[course].url);
-          var formattedCourseProvider = HTMLonlineSchool.replace("%data%", education.onlineClasses[course].provider);
-          formattedCourseName = formattedCourseName + formattedCourseProvider;
+          var formattedCourseName = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
+          formattedCourseName = formattedCourseName.replace("%url%", education.onlineCourses[course].url);
+          var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
+          formattedCourseName = formattedCourseName + formattedSchool;
           $(".online-entry:last").append(formattedCourseName);
 
-          var formattedCourseDate = HTMLonlineDates.replace("%data%", education.onlineClasses[course].date);
+          var formattedCourseDate = HTMLonlineDates.replace("%data%", education.onlineCourses[course].date);
           $(".online-entry:last").append(formattedCourseDate);
 
-          var formattedCourseDesc = HTMLonlineDesc.replace("%data%", education.onlineClasses[course].description);
+          var formattedCourseDesc = HTMLonlineDesc.replace("%data%", education.onlineCourses[course].description);
           $(".online-entry:last").append(formattedCourseDesc);
 
         }
@@ -216,36 +216,42 @@
 
 
     // FUNCTIONS TO HIDE EMPTY SECTIONS OF THE CV
-      if (document.getElementsByClassName('flex-item').length === 0)
-        {
-          document.getElementById('topContacts').style.display = 'none';
-        }
-      if (document.getElementsByTagName('h1').length === 0)
-        {
-          document.getElementById('header').style.display = 'none';
-        }
-      if (document.getElementsByClassName('work-entry').length === 0)
-        {
-          document.getElementById('workExperience').style.display = 'none';
-        }
-      if (document.getElementsByClassName('project-entry').length === 0)
-        {
-          document.getElementById('projects').style.display = 'none';
-        }
-      if (document.getElementsByClassName('education-entry').length === 0)
-        {
-          document.getElementById('education').style.display = 'none';
-        }
-      if (document.getElementsByClassName('flex-item').length === 0)
-        {
-          document.getElementById('letsConnect').style.display = 'none';
-        }
-      if (document.getElementById('map') === null)
-        {
-          document.getElementById('mapDiv').style.display = 'none';
-        }
+    if (document.getElementsByClassName('flex-item').length === 0)
+      {
+        document.getElementById('topContacts').style.display = 'none';
+      }
+    if (document.getElementsByTagName('h1').length === 0)
+      {
+        document.getElementById('header').style.display = 'none';
+      }
+    if (document.getElementsByClassName('work-entry').length === 0)
+      {
+        document.getElementById('workExperience').style.display = 'none';
+      }
+    if (document.getElementsByClassName('project-entry').length === 0)
+      {
+        document.getElementById('projects').style.display = 'none';
+      }
+    if (document.getElementsByClassName('education-entry').length === 0)
+      {
+        document.getElementById('education').style.display = 'none';
+      }
+    if (document.getElementsByClassName('flex-item').length === 0)
+      {
+        document.getElementById('letsConnect').style.display = 'none';
+      }
+    if (document.getElementById('map') === null)
+      {
+        document.getElementById('mapDiv').style.display = 'none';
+      }
 
-    // $("#main").append(internationalizeButton);
+    // log the location of the mouse pointer on each click. that is how the analytics tools work!!
+    $(document).click(function(loc)
+      {
+        console.log(loc);
+      });
+
+    $("#main").append(internationalizeButton);
 
   </script>
 </body>

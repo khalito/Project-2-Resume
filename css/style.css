@@ -100,14 +100,24 @@ a {
   line-height: 28px;
 }
 
-#skillsH3 {
+.skillsH3 {
   color: #F5AE23;
-  display: none;
+  padding-left: 0;
+  padding-right: 0;
+  float: left;
+}
+
+.left {
+  float: left;
+}
+
+.summaryH3 {
+ color: #F5AE23;
 }
 
 .sub-title {
   padding-top: 3%;
-  padding-bottom: 0px;
+  padding-bottom: 0;
 }
 
 .orange {

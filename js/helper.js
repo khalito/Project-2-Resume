@@ -12,9 +12,10 @@ var HTMLlocation = '<li class="flex-item"><span class="orange-text">location:</s
 var HTMLbioPic = '<img src="%data%" class="biopic">';
 var HTMLwelcomeMsg = '<span class="welcome-message">%data%</span>';
 
-// var HTMLskillsStart = '<h3 id="skillsH3">Skills at a Glance:</h3><ul id="skills" class="flex-box"></ul>';
-var HTMLsummaryStart = '<h3 id="skillsH3">Summary</h3><p id="summary" class="white-text"></p>';
-// var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
+var HTMLskillsStart = '<h3 class="skillsH3">Skills at a Glance:</h3><ul id="skills" class="flex-box special-ul left"></ul>';
+var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
+
+var HTMLsummaryStart = '<h3 class="summaryH3">Summary</h3><p id="summary" class="white-text"></p><br>';
 
 var HTMLworkStart = '<div class="work-entry"></div>';
 var HTMLworkEmployer = '<a href="#">%data%';
@@ -83,7 +84,7 @@ $(document).ready(function() {
 
 });
 
-The next few lines about clicks are for the Collecting Click Locations quiz in Lesson 2.
+// The next few lines about clicks are for the Collecting Click Locations quiz in Lesson 2.
 clickLocations = [];
 
 function logClicks(x,y) {
@@ -101,17 +102,11 @@ $(document).click(function(loc)
   console.log(loc);
   });
 
-/*
-This is the fun part. Here's where we generate the custom Google Map for the website.
-See the documentation below for more details.
-https://developers.google.com/maps/documentation/javascript/reference
-*/
-var map;    // declares a global map variable
+
+// START MAP SOLUTION
+var map;
 
 
-/*
-Start here! initializeMap() is called when page is loaded.
-*/
 function initializeMap() {
 
   var locations;

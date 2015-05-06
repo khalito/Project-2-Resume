@@ -27,27 +27,36 @@ var bio =
 
 		$('#header').prepend(formattedName, formattedRole);
 
-		var formattedInfo = HTMLmobile.replace("%data%", bio.contactInfo["mobile"]);
-		$("#topContacts").append(formattedInfo);
-		$("#footerContacts").append(formattedInfo);
+		var formattedMobile = HTMLmobile.replace("%data%", bio.contactInfo["mobile"]);
+		$("#topContacts").append(formattedMobile);
+		$("#footerContacts").append(formattedMobile);
 
-		formattedInfo = HTMLemail.replace("%data%", bio.contactInfo["E-mail"]);
-		$("#topContacts").append(formattedInfo);
-		$("#footerContacts").append(formattedInfo);
+		var formattedEmail = HTMLemail.replace("%data%", bio.contactInfo["E-mail"]);
+		$("#topContacts").append(formattedEmail);
+		$("#footerContacts").append(formattedEmail);
 
-		formattedInfo = HTMLgithub.replace("%data%", bio.contactInfo["github"]);
-		$("#topContacts").append(formattedInfo);
-		$("#footerContacts").append(formattedInfo);
+		var formattedGit = HTMLgithub.replace("%data%", bio.contactInfo["github"]);
+		$("#topContacts").append(formattedGit);
+		$("#footerContacts").append(formattedGit);
 
-		formattedInfo = HTMLlocation.replace("%data%", bio.contactInfo["location"]);
-		$("#topContacts").append(formattedInfo);
-		$("#footerContacts").append(formattedInfo);
+		var formattedLocationInfo = HTMLlocation.replace("%data%", bio.contactInfo["location"]);
+		$("#topContacts").append(formattedLocationInfo);
+		$("#footerContacts").append(formattedLocationInfo);
 
 		//ADD PICTURE AND SUMMARY
 		var bioPic = HTMLbioPic.replace("%data%", "images/fry.jpg");
 		$("#header").append(bioPic);
 		$("#header").append(HTMLsummaryStart);
 		$("#summary").append(bio.summary);
+
+		// ADD SKILLS
+		$("#header").append(HTMLskillsStart);
+			for (var skill = 0; skill < bio.skills.length; skill++)
+				{
+				var formattedSkills = HTMLskills.replace("%data%", bio.skills[skill]);
+				$("#skills").append(formattedSkills);
+				}
+
 		}
 	};
 bio.display();
@@ -114,7 +123,7 @@ var work =
 		if(work.jobs)
 			{
 			// loop through all jobs mention in work
-			for(var job in work.jobs)
+			for(var job = 0; job < work.jobs.length; job++)
 				{
 				//this adds a new div with the class "work-entry". This will be useful later as a reference when we append the job info after the last work-entry item
 				$("#workExperience").append(HTMLworkStart);
@@ -130,13 +139,13 @@ var work =
 				var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
 				$(".work-entry:last").append(formattedDates);
 
-				for (var role in work.jobs[job].description)
+				for (var role = 0; role < work.jobs[job].description.length; role++)
 					{
 					var formattedResponsibility = HTMLworkDescription.replace("%data%", work.jobs[job].description[role].responsibility);
 					$(".work-entry:last").append(formattedResponsibility);
 
 					$(".work-entry:last").append(HTMLworkTaskStart);
-					for (var task in work.jobs[job].description[role].tasks)
+					for (var task = 0; task < work.jobs[job].description[role].tasks.length; task++)
 						{
 						var formattedTask = HTMLworkTask.replace("%data%", work.jobs[job].description[role].tasks[task]);
 						$(".task-entry:last").append(formattedTask);
@@ -178,7 +187,7 @@ var projects =
 		],
 	"display" : function()
 		{
-			for (var project in projects.projects)
+			for (var project = 0; project < projects.projects.length; project++)
 			{
 				$("#projects").append(HTMLprojectStart);
 
@@ -203,7 +212,7 @@ projects.display();
 
 
 var education =
-{
+	{
 	"schools" :
 		[
 			{
@@ -265,7 +274,7 @@ var education =
 		],
 	"display" : function()
 		{
-		for (var school in education.schools)
+		for (var school = 0; school < education.schools.length; school++)
 			{
 
 			$("#education").append(HTMLschoolStart);
@@ -287,7 +296,7 @@ var education =
 
 			$(".education-entry:last").append(HTMLsubjectsStart);
 
-			for (var subject in education.schools[school].subjects)
+			for (var subject = 0; subject < education.schools[school].subjects.length; subject++)
 				{
 				var formattedSubjects = HTMLsubjects.replace("%data%", education.schools[school].subjects[subject]);
 				$(".subject-entry:last").append(formattedSubjects);
@@ -295,7 +304,7 @@ var education =
 			}
 		$("#education").append(HTMLonlineCourses);
 
-		for (var course in education.onlineCourses)
+		for (var course = 0; course < education.onlineCourses.length; course++)
 			{
 			$("#education").append(HTMLonlineStart);
 
@@ -312,7 +321,7 @@ var education =
 			$(".online-entry:last").append(formattedCourseDesc);
 			}
 		}
-};
+	};
 education.display();
 
 $("#mapDiv").append(googleMap);
